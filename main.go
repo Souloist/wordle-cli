@@ -26,28 +26,35 @@ func main() {
 		guess = strings.TrimSpace(strings.ToLower(guess))
 		if len(guess) > MaxWordLength {
 			fmt.Println("Word can only be 5 characters!")
+			attempt++
 			continue
 		}
 
 		if !isValidWord(guess, guessesMap) {
 			fmt.Println("This word cannot be found in our word list")
+			attempt++
 			continue
-		}
-		if guess == answer {
-			printPreviousGuesses(previousGuesses, guess, answer)
-			fmt.Println("Congrats you got the correct word! 🎉")
-			return
 		}
 
 		if err != nil {
 			fmt.Println("Something went wrong. Please try again.")
+			attempt++
 			continue
 		}
-		printPreviousGuesses(previousGuesses, guess, answer)
+		formattedGuess := getGuessDisplay(guess, answer)
+		previousGuesses = append(previousGuesses, formattedGuess)
+		for _, guess := range previousGuesses {
+			fmt.Println(guess)
+		}
+
+		if guess == answer {
+			fmt.Println("Congrats you got the correct word! 🎉")
+			return
+		}
 	}
 
 	fmt.Println("Game over ☠️! You ran out of attempts. ( • ᴖ • ｡) ")
-	fmt.Printf("The Answer was: %#v", answer)
+	fmt.Println("The Answer was:", answer)
 }
 
 func createWordList(path string) []string {
@@ -72,12 +79,4 @@ func convertToMap(wordList []string) map[string]struct{} {
 		wordMap[word] = struct{}{}
 	}
 	return wordMap
-}
-
-func printPreviousGuesses(previousGuesses []string, guess string, answer string) {
-	formattedGuess := getGuessDisplay(guess, answer)
-	previousGuesses = append(previousGuesses, formattedGuess)
-	for _, attempt := range previousGuesses {
-		fmt.Println(attempt)
-	}
 }
