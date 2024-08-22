@@ -53,7 +53,7 @@ func main() {
 
 		formattedGuess := getGuessDisplay(guess, answer)
 		previousGuesses = append(previousGuesses, formattedGuess)
-		//clearTerminal()
+		clearTerminal()
 		for _, guess := range previousGuesses {
 			fmt.Println(guess)
 		}
