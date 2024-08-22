@@ -5,5 +5,5 @@ Command line version of popular game Wordle
 
 To run this app:
 ```
-go run main.go
+go run .
 ```
