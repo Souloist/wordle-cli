@@ -21,7 +21,6 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Welcome to Wordle CLI! ヾ(＾ ∇ ＾).")
-	fmt.Println(answer)
 
 	for attempt := MaxGuesses; attempt > 0; attempt-- {
 		fmt.Print("Please type your guess: ")
