@@ -6,6 +6,8 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"os/exec"
+	"runtime"
 	"strings"
 )
 
@@ -18,12 +20,19 @@ func main() {
 	answer := answers[rand.Intn(len(answers))]
 
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Welcome to Wordle CLI! ヾ(＾ ∇ ＾).\n")
+	fmt.Println("Welcome to Wordle CLI! ヾ(＾ ∇ ＾).")
+	fmt.Println(answer)
 
 	for attempt := MaxGuesses; attempt > 0; attempt-- {
 		fmt.Print("Please type your guess: ")
 		guess, err := reader.ReadString('\n')
 		guess = strings.TrimSpace(strings.ToLower(guess))
+
+		if guess == "exit" {
+			fmt.Println("Bye!")
+			return
+		}
+
 		if len(guess) > MaxWordLength {
 			fmt.Println("Word can only be 5 characters!")
 			attempt++
@@ -41,8 +50,10 @@ func main() {
 			attempt++
 			continue
 		}
+
 		formattedGuess := getGuessDisplay(guess, answer)
 		previousGuesses = append(previousGuesses, formattedGuess)
+		//clearTerminal()
 		for _, guess := range previousGuesses {
 			fmt.Println(guess)
 		}
@@ -79,4 +90,19 @@ func convertToMap(wordList []string) map[string]struct{} {
 		wordMap[word] = struct{}{}
 	}
 	return wordMap
+}
+
+// clearTerminal clears the terminal screen depending on the OS
+func clearTerminal() {
+	var clearCmd *exec.Cmd
+
+	switch runtime.GOOS {
+	case "windows":
+		clearCmd = exec.Command("cmd", "/c", "cls")
+	default: // Linux, macOS, etc.
+		clearCmd = exec.Command("clear")
+	}
+
+	clearCmd.Stdout = os.Stdout
+	clearCmd.Run()
 }

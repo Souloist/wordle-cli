@@ -1,6 +1,8 @@
 package main
 
-import "strings"
+import (
+	"strings"
+)
 
 func getANSIColor(c ANSIColor) string {
 	switch c {
@@ -39,8 +41,7 @@ func getColorArrayForWord(input string, answer string) []ANSIColor {
 			colorArray = append(colorArray, ANSIColorExactMatch)
 			continue
 		}
-
-		if strings.Contains(string(char), answer) {
+		if strings.Contains(answer, string(char)) {
 			colorArray = append(colorArray, ANSIColorExistMatch)
 		} else {
 			colorArray = append(colorArray, ANSIColorNoMatch)
