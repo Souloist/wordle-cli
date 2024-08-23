@@ -13,7 +13,9 @@ go build
 ./wordle-cli
 ```
 
-How to play:
+## How to play
+
+__WARNING__: This game does clear the terminal 
 
 When you execute the app, you'll be asked to make a guess.
 - characters which are contained in the answer will be highlighted yellow
@@ -28,7 +30,10 @@ example:
 
 Can't win them all :(
 
+
+
 ## Future Improvements
 
 - Add a keyboard visual after each guess to keep track of letters which were either contained in the answer, had the correct index or were not part of the answer
 - Improve the guess display to use colored background tiles instead of
+- Add a flag to ask the user if the game should clear the terminal after guesses (felt like a better game UX but maybe not the best idea)
