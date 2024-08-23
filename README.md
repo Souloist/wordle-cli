@@ -35,5 +35,5 @@ Can't win them all :(
 ## Future Improvements
 
 - Add a keyboard visual after each guess to keep track of letters which were either contained in the answer, had the correct index or were not part of the answer
-- Improve the guess display to use colored background tiles instead of
+- Improve the guess display to use colored background tiles instead of just ANSI escape codes to color letters
 - Add a flag to ask the user if the game should clear the terminal after guesses (felt like a better game UX but maybe not the best idea)
