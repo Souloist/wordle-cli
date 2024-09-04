@@ -5,12 +5,12 @@ Simple command line version of popular game Wordle as an excuse to learn Go
 
 To run this app:
 ```
-go run .
+go run cmd/main.go
 ```
 or you can build the binary and run it
 ```
-go build
-./wordle-cli
+go build cmd/main.go
+./main
 ```
 
 ## How to play
